@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+public class Calc {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        double inA = 0;
+        double inB = 0;
+        String operator = "";
+
+        while (true) {
+            try {
+                System.out.println("Please enter the first number: ");
+                inA = Double.parseDouble(scanner.nextLine());
+
+                System.out.println("Please enter the operator (+, -, *, /): ");
+                operator = scanner.nextLine();
+
+                System.out.println("Please enter the second number: ");
+                inB = Double.parseDouble(scanner.nextLine());
+                
+                // Validate operator
+                if (!operator.equals("+") && !operator.equals("-") && !operator.equals("*") && !operator.equals("/")) {
+                    throw new Exception("Invalid operator.");
+                }
+                
+                break; // if we reached this point, it means that we have valid inputs and we can break the loop
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number. Please enter a valid number.");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        double TheAnswer = NumberCruncher.calculate(inA, inB, operator);
+        System.out.println("The answer is: " + TheAnswer);
+        scanner.close();
+    }
+}
+
+class NumberCruncher{
+    public static double calculate(double a, double b, String operator){
+        switch (operator) {
+            case "+":
+                return a + b;
+            case "-":
+                return a - b;
+            case "*":
+                return a * b;
+            case "/":
+                if (b != 0) {
+                    return a / b;
+                } else {
+                    System.out.println("Error: Division by zero is not allowed.");
+                    return 0;
+                }
+            default:
+                return 0;
+        }
+    }
+}
