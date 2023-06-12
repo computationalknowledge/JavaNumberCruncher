@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Calc {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        int inA = 0;
+        int inB = 0;
+
+        while (true) {
+            try {
+                System.out.println("Please enter the first number: ");
+                String inputA = scanner.nextLine();
+                inA = Integer.parseInt(inputA);
+
+                System.out.println("Please enter the second number: ");
+                String inputB = scanner.nextLine();
+                inB = Integer.parseInt(inputB);
+                
+                break; // if we reached this point, it means that we have valid inputs and we can break the loop
+            } catch (NumberFormatException e) {
+                System.out.println("You made a mistake. Please enter two integer numbers.");
+            }
+        }
+
+        int TheAnswer = NumberCruncher.add(inA, inB);
+        System.out.println("The answer is: " + TheAnswer);
+        scanner.close();
+    }
+}
+
+class NumberCruncher{
+    public static int add(int a, int b){
+        return a + b;
+    }
+}
